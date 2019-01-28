@@ -2,6 +2,10 @@
 Changelog for package pilz_trajectory_generation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Enable gripper commands inside a sequence
+
 0.3.6 (2019-02-26)
 ------------------
 * refactor the testdataloader
