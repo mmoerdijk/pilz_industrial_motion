@@ -18,6 +18,7 @@
 #ifndef PATH_CIRCLE_GENERATOR_H
 #define PATH_CIRCLE_GENERATOR_H
 
+#include <boost/make_unique.hpp>
 #include <kdl/path.hpp>
 #include <kdl/path_circle.hpp>
 #include <kdl/utilities/error.h>
