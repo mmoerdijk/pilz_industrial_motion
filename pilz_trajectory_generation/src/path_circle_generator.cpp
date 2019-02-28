@@ -92,13 +92,18 @@ std::unique_ptr<KDL::Path> PathCircleGenerator::circleFromInterim(
   {
     alpha = 2*M_PI - alpha;
   }
+  KDL::Vector aux_point { goal_pose.p };
+  if(alpha-M_PI < MAX_COLINEAR_NORM)
+  {
+    aux_point= interim_point;
+  }
 
   KDL::RotationalInterpolation* rot_interpo = new KDL::RotationalInterpolation_SingleAxis();
   try
   {
     return std::unique_ptr<KDL::Path>(new KDL::Path_Circle(start_pose,
                                                   center_point,
-                                                  interim_point,
+                                                  aux_point,
                                                   goal_pose.M,
                                                   alpha,
                                                   rot_interpo,
