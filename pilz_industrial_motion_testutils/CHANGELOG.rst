@@ -2,6 +2,10 @@
 Changelog for package pilz_industrial_motion_testutils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Allow gripper commands in sequence command
+
 0.3.6 (2019-02-26)
 ------------------
 
