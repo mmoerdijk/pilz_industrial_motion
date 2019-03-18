@@ -43,6 +43,8 @@ namespace testutils
 const std::string JOINT_NAME_PREFIX("prbt_joint_");
 
 static constexpr int32_t DEFAULT_SERVICE_TIMEOUT(10);
+static constexpr double DEFAULT_ACCELERATION_EQUALITY_TOLERANCE {1e-6};
+static constexpr double DEFAULT_ROTATION_AXIS_EQUALITY_TOLERANCE {1e-8};
 
 /**
    * @brief Convert degree to rad.
@@ -495,10 +497,24 @@ void checkRobotModel(const moveit::core::RobotModelConstPtr &robot_model,
                      const std::string& group_name,
                      const std::string& link_name);
 /**
- * @brief Check that a given vector of accelerations represents a trapezoid
- * velocity profile
+ * @brief Check that the translational path of a given trajectory has a trapezoid velocity profile
+ * @param acc_tol: tolerance for comparing acceleration values
  */
-::testing::AssertionResult hasTrapezoidVelocity(std::vector<double> accelerations, const double similiarity_tolerance);
+::testing::AssertionResult hasTrapezoidVelocity(std::vector<double> accelerations, const double acc_tol);
+
+::testing::AssertionResult checkCartesianTranslationalPath(robot_trajectory::RobotTrajectoryConstPtr trajectory,
+                                                           const std::string &link_name,
+                                                           const double acc_tol = DEFAULT_ACCELERATION_EQUALITY_TOLERANCE);
+
+/**
+ * @brief Check that the rotational path of a given trajectory is a quaternion slerp.
+ * @param angular_vel_tol: tolerance for comparing angular velocitie values
+ * @param rot_axis_tol: tolerance for comparing rotation axes (in the L2 norm)
+ */
+::testing::AssertionResult checkCartesianRotationalPath(robot_trajectory::RobotTrajectoryConstPtr trajectory,
+                                                        const std::string &link_name,
+                                                        const double rot_axis_tol = DEFAULT_ROTATION_AXIS_EQUALITY_TOLERANCE,
+                                                        const double acc_tol = DEFAULT_ACCELERATION_EQUALITY_TOLERANCE);
 }
 
 #endif // TEST_UTILS_H
